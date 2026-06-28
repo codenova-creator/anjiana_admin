@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Anjiana Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<style>
+  .auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1f1f1f 0%, #111111 100%);
+    position: relative;
+  }
+
+  .auth-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+  }
+
+  .auth-box {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    color: #fff;
+  }
+
+  .auth-box .form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .auth-box .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .auth-box .form-control:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .password-wrapper {
+    position: relative;
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .password-toggle:hover {
+    color: #fff;
+  }
+
+  .forgot-link {
+    display: block;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-top: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .forgot-link:hover {
+    text-decoration: underline;
+  }
+
+  .reset-message {
+    display: none;
+    background: rgba(76, 175, 80, 0.2);
+    color: #81C784;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+</style>
+
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-box">
+      <div class="logo" style="text-align: center; margin-bottom: 2rem; color: #fff;">Anjiana Store ADMIN</div>
+      <h2 style="font-size: 1.5rem; margin-bottom: 2rem; text-align: center; font-weight: 500;">Welcome Back</h2>
+
+      <form id="loginForm">
+        <div id="errorMessage"
+          style="display: none; color: #EF5350; background: rgba(239, 83, 80, 0.1); border: 1px solid rgba(239, 83, 80, 0.3); padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem; text-align: center;">
+        </div>
+        <div id="resetMessage" class="reset-message"></div>
+
+        <div class="form-group">
+          <label for="email" style="color: rgba(255,255,255,0.8);">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="admin@Anjiana Store.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password" style="color: rgba(255,255,255,0.8);">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            <button type="button" id="togglePassword" class="password-toggle" aria-label="Toggle password visibility">
+              👁️
+            </button>
+          </div>
+          <a class="forgot-link" id="forgotPasswordBtn">Forgot Password?</a>
+        </div>
+
+        <button type="submit" id="loginBtn" class="btn btn-primary"
+          style="width: 100%; margin-top: 1rem; padding: 14px; font-size: 1rem;">Login to Dashboard</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="../index.html" style="color: rgba(255,255,255,0.5); font-size: 0.9rem; text-decoration: none;">← Back
+          to Store</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script type="module" src="js/admin-auth.js"></script>
+</body>
+
+</html>

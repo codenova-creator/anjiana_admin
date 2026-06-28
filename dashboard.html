@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">Anjiana Store ADMIN</div>
+    <nav class="admin-nav">
+      <a href="dashboard.html" class="active">Products</a>
+      <a href="add-product.html">Add New Product</a>
+      <a href="pos.html">POS System</a>
+      <a href="orders.html">Orders</a>
+      <a href="#">Customers</a>
+      <a href="#">Settings</a>
+    </nav>
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 1rem;">
+      <a href="#" id="goToStoreBtn" style="color: var(--accent-color); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <span>🏪</span> Go to Store
+      </a>
+      <a href="#" id="logoutBtn" style="color: rgba(255,255,255,0.5); font-size: 0.9rem; text-decoration: none;">Logout</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-content">
+    
+    <header class="admin-header">
+      <div>
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Product Management</h1>
+        <p class="text-muted">Manage your store's inventory and listings.</p>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <div id="liveClock" class="premium-clock"></div>
+        <a href="add-product.html" class="btn btn-accent">+ Add Product</a>
+      </div>
+    </header>
+
+    <section>
+      <div class="admin-panel-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dynamic products will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script type="module" src="js/admin-auth.js"></script>
+  <script type="module" src="js/admin-dashboard.js"></script>
+</body>
+</html>
