@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anjiana Admin Panel – Feature Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', Arial, sans-serif; font-size: 11pt; line-height: 1.7; color: #1a1a1a; background: #f5f5f5; }
+    .page-wrapper { max-width: 860px; margin: 40px auto; background: #fff; padding: 60px 70px; box-shadow: 0 4px 30px rgba(0,0,0,0.08); border-radius: 8px; }
+    .cover { text-align: center; padding: 60px 0 80px; border-bottom: 3px solid #D4AF37; margin-bottom: 60px; }
+    .cover .logo { font-size: 36pt; font-weight: 700; color: #1a1a1a; letter-spacing: 2px; }
+    .cover .subtitle { font-size: 14pt; color: #888; margin-top: 8px; }
+    .cover .doc-title { font-size: 22pt; font-weight: 600; color: #D4AF37; margin-top: 30px; }
+    .cover .doc-meta { font-size: 10pt; color: #aaa; margin-top: 20px; }
+    .cover .badge { display: inline-block; margin-top: 20px; background: #1a1a1a; color: #D4AF37; padding: 6px 18px; border-radius: 20px; font-size: 9pt; font-weight: 600; letter-spacing: 1px; }
+    .toc { margin-bottom: 50px; }
+    .toc h2 { font-size: 14pt; color: #1a1a1a; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #D4AF37; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 6px; font-size: 10.5pt; }
+    .toc a { color: #D4AF37; text-decoration: none; font-weight: 500; }
+    .feature-section { margin-bottom: 55px; page-break-inside: avoid; }
+    .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; }
+    .section-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #1a1a1a, #333); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .section-number { font-size: 9pt; color: #D4AF37; font-weight: 700; letter-spacing: 1px; }
+    .section-title { font-size: 16pt; font-weight: 700; color: #1a1a1a; }
+    h3 { font-size: 11.5pt; font-weight: 600; color: #1a1a1a; margin: 22px 0 8px; }
+    h4 { font-size: 10.5pt; font-weight: 600; color: #444; margin: 16px 0 6px; }
+    p { margin-bottom: 10px; }
+    ul, ol { padding-left: 22px; margin-bottom: 12px; }
+    li { margin-bottom: 4px; }
+    .flow-box { background: #f8f8f8; border-left: 4px solid #D4AF37; padding: 14px 18px; border-radius: 0 6px 6px 0; margin: 14px 0; font-size: 10pt; }
+    .info-box { background: #fffbea; border: 1px solid #f0e3a0; border-radius: 6px; padding: 12px 16px; margin: 14px 0; font-size: 10pt; }
+    .warning-box { background: #fff5f5; border: 1px solid #f5c0c0; border-radius: 6px; padding: 12px 16px; margin: 14px 0; font-size: 10pt; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 10pt; }
+    .data-table th { background: #1a1a1a; color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
+    .data-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+    .data-table tr:nth-child(even) td { background: #fafafa; }
+    .tag { display: inline-block; background: #f0f0f0; color: #555; padding: 2px 8px; border-radius: 4px; font-size: 9pt; font-family: monospace; }
+    .tag.gold { background: #fffbea; color: #9a7800; border: 1px solid #f0d060; }
+    .tag.green { background: #f0fff4; color: #2a6e3a; border: 1px solid #a0d8b0; }
+    .tag.red { background: #fff5f5; color: #a02020; border: 1px solid #f5c0c0; }
+    .step-list { counter-reset: step; list-style: none; padding-left: 0; }
+    .step-list li { counter-increment: step; display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+    .step-list li::before { content: counter(step); background: #D4AF37; color: #1a1a1a; font-weight: 700; font-size: 9pt; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .print-btn { position: fixed; bottom: 30px; right: 30px; background: #D4AF37; color: #1a1a1a; border: none; padding: 14px 24px; border-radius: 30px; font-weight: 700; font-size: 11pt; cursor: pointer; box-shadow: 0 6px 20px rgba(212,175,55,0.4); font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .print-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(212,175,55,0.5); }
+    hr.section-divider { border: none; border-top: 1px solid #eee; margin: 40px 0; }
+    @media print { body { background: #fff; } .page-wrapper { box-shadow: none; margin: 0; padding: 30px 40px; max-width: 100%; border-radius: 0; } .print-btn { display: none; } }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="cover">
+    <div class="logo">ANJIANA</div>
+    <div class="subtitle">Clothing Store Management System</div>
+    <div class="doc-title">Admin Panel Feature Guide</div>
+    <div class="doc-meta">How Each Admin Feature Connects to the Main Storefront</div>
+    <div class="badge">INTERNAL DOCUMENTATION — JULY 2026</div>
+  </div>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#overview">System Architecture Overview</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#products">Products Management</a></li>
+      <li><a href="#add-product">Add Product</a></li>
+      <li><a href="#categories">Category Management</a></li>
+      <li><a href="#inventory">Inventory Management</a></li>
+      <li><a href="#payments">Payment Ledger</a></li>
+      <li><a href="#shipping">Shipping Configuration</a></li>
+      <li><a href="#discounts">Discounts &amp; Banners</a></li>
+      <li><a href="#reviews">Reviews &amp; Feedback</a></li>
+      <li><a href="#reports">Reports &amp; Analytics</a></li>
+      <li><a href="#staff">Staff Management</a></li>
+      <li><a href="#settings">Store Settings</a></li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="feature-section" id="overview">
+    <div class="section-header">
+      <div class="section-icon">🏗️</div>
+      <div><div class="section-number">SECTION 1</div><div class="section-title">System Architecture Overview</div></div>
+    </div>
+    <p>The Anjiana system is split into two separate web applications that share a single <strong>Firebase / Firestore</strong> backend database. Any change in the Admin Panel is immediately visible on the storefront — there is no delay or sync step.</p>
+    <table class="data-table">
+      <tr><th>Application</th><th>Purpose</th><th>Key Files</th></tr>
+      <tr><td><strong>Storefront</strong> (CLothingStore/)</td><td>Customer-facing shopping site</td><td>index.html, products.html, product-details.html, cart.html, wishlist.html</td></tr>
+      <tr><td><strong>Admin Panel</strong> (admin_anjiana/)</td><td>Back-office management dashboard</td><td>dashboard.html, js/admin-dashboard.js</td></tr>
+    </table>
+    <h3>Shared Firestore Collections</h3>
+    <table class="data-table">
+      <tr><th>Collection</th><th>Used By</th><th>Purpose</th></tr>
+      <tr><td><span class="tag">products</span></td><td>Both</td><td>Product catalog displayed on the store</td></tr>
+      <tr><td><span class="tag">categories</span></td><td>Both</td><td>Category filter options on products page</td></tr>
+      <tr><td><span class="tag">settings/store_info</span></td><td>Both</td><td>Store name, currency, shipping fees, social links</td></tr>
+      <tr><td><span class="tag">banners</span></td><td>Storefront</td><td>Homepage hero slides and seasonal grids</td></tr>
+      <tr><td><span class="tag">coupons</span></td><td>Storefront checkout</td><td>Discount codes applied at cart</td></tr>
+      <tr><td><span class="tag">orders</span></td><td>Admin + Storefront checkout</td><td>Customer order records</td></tr>
+      <tr><td><span class="tag">reviews</span></td><td>Both</td><td>Customer ratings and admin replies</td></tr>
+      <tr><td><span class="tag">staff</span></td><td>Admin only</td><td>Login credentials and role access control</td></tr>
+      <tr><td><span class="tag">stock_history</span></td><td>Admin only</td><td>Restock and adjustment audit logs</td></tr>
+    </table>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 2 -->
+  <div class="feature-section" id="dashboard">
+    <div class="section-header">
+      <div class="section-icon">📊</div>
+      <div><div class="section-number">SECTION 2</div><div class="section-title">Dashboard</div></div>
+    </div>
+    <p>The Dashboard is the home screen of the admin panel, providing a real-time snapshot of store performance by pulling live data from Firestore when opened.</p>
+    <h3>KPI Widgets</h3>
+    <table class="data-table">
+      <tr><th>KPI</th><th>Data Source</th><th>Calculation</th></tr>
+      <tr><td>Total Sales</td><td><span class="tag">orders</span></td><td>Sum of totalAmount across all order documents</td></tr>
+      <tr><td>Low Stock Alerts</td><td><span class="tag">products</span></td><td>Count of products/variants with stock &le; 5</td></tr>
+    </table>
+    <h3>Monthly Sales Chart</h3>
+    <p>A Chart.js line chart groups orders by calendar month and plots gross revenue over time. The chart label dynamically shows the active currency symbol (e.g. "Gross Monthly Sales (Rs.)").</p>
+    <h3>Best-Selling Products</h3>
+    <p>The admin panel tallies how many times each product was purchased across all orders and displays the top sellers ranked by quantity sold.</p>
+    <div class="info-box">💡 <strong>Storefront Link:</strong> The Dashboard reflects real customer purchases and product views that happen on the main storefront. No direct UI component is shown on the customer-facing site from this section.</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 3 -->
+  <div class="feature-section" id="products">
+    <div class="section-header">
+      <div class="section-icon">👗</div>
+      <div><div class="section-number">SECTION 3</div><div class="section-title">Products Management</div></div>
+    </div>
+    <p>This is the primary catalog management view. It lists every product from the <span class="tag">products</span> Firestore collection and allows administrators to edit or delete them.</p>
+    <h3>How Changes Flow to the Storefront</h3>
+    <div class="flow-box">
+      <strong>Admin edits a product</strong> → saved to Firestore <span class="tag">products</span><br>
+      → Storefront <code>products-logic.js</code> calls <code>getDocs(collection(db, "products"))</code> on next page load<br>
+      → Updated products <strong>immediately appear</strong> on products.html, index.html, wishlist.html
+    </div>
+    <h3>Storefront Pages Affected</h3>
+    <ul>
+      <li><strong>index.html</strong> — Shows 3 featured products on the homepage grid</li>
+      <li><strong>products.html</strong> — Full listing with filtering and search</li>
+      <li><strong>product-details.html</strong> — Individual product loaded by Firestore document ID via URL <span class="tag">?id=</span></li>
+      <li><strong>wishlist.html</strong> — Saved products fetched from Firestore by ID stored in localStorage</li>
+    </ul>
+    <h3>Product Fields &amp; Their Storefront Display</h3>
+    <table class="data-table">
+      <tr><th>Field</th><th>Shown Where on Storefront</th></tr>
+      <tr><td>name</td><td>Product card title, detail page heading, browser tab</td></tr>
+      <tr><td>price</td><td>All product cards and detail page price display</td></tr>
+      <tr><td>discount (%)</td><td>Strike-through original price + sale badge on cards and detail page</td></tr>
+      <tr><td>imageUrl</td><td>Product card thumbnails and detail hero image</td></tr>
+      <tr><td>category</td><td>Category tag below product name; used as URL filter keyword</td></tr>
+      <tr><td>description</td><td>Product detail page body text</td></tr>
+      <tr><td>sizes / sizeStock</td><td>Size selector bubbles — out-of-stock sizes shown as disabled</td></tr>
+      <tr><td>colors / sizeColorStock</td><td>Color swatch buttons; cross-variant real-time stock validation</td></tr>
+      <tr><td>stock</td><td>In Stock / Out of Stock label; disables Add-to-Cart button when 0</td></tr>
+    </table>
+    <h3>Storefront Search &amp; Filtering via URL Parameters</h3>
+    <ul>
+      <li><span class="tag">?category=women</span> — Filters products where category field contains "women"</li>
+      <li><span class="tag">?tag=jackets</span> — Filters by secondary tag keyword</li>
+      <li><span class="tag">?q=cotton</span> — Text search across product name, category, and description</li>
+    </ul>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 4 -->
+  <div class="feature-section" id="add-product">
+    <div class="section-header">
+      <div class="section-icon">➕</div>
+      <div><div class="section-number">SECTION 4</div><div class="section-title">Add Product</div></div>
+    </div>
+    <p>The Add Product form creates new product listings or edits existing ones (when <span class="tag">?id=</span> URL param is provided). Every saved field directly controls what customers see on the storefront.</p>
+    <h3>Field Impact Summary</h3>
+    <table class="data-table">
+      <tr><th>Admin Field</th><th>Storefront Effect</th></tr>
+      <tr><td>Product Name</td><td>Card title, page heading, browser tab title</td></tr>
+      <tr><td>Category</td><td>Filter tag on card; drives URL-based category filtering</td></tr>
+      <tr><td>Price &amp; Discount %</td><td>Final displayed price + sale badge percentage</td></tr>
+      <tr><td>Sizes (checkboxes)</td><td>Renders size selector bubbles on product detail page</td></tr>
+      <tr><td>Colors (checkboxes + custom hex)</td><td>Renders color swatch buttons; custom hex colors render as CSS background</td></tr>
+      <tr><td>Variant Stock Matrix</td><td>Per-combination stock used for out-of-stock greying and cart validation</td></tr>
+      <tr><td>Images (multi-upload)</td><td>Uploaded to Firebase Storage; first image = product card thumbnail + detail hero</td></tr>
+      <tr><td>Description</td><td>Product detail page body text paragraph</td></tr>
+    </table>
+    <h3>Variant Stock System (Size x Color Matrix)</h3>
+    <p>When both sizes and colors are selected, a stock matrix is generated creating a <span class="tag">sizeColorStock</span> map in Firestore (e.g. <code>{"M_Red": 5, "L_Blue": 12}</code>). The storefront uses this map to:</p>
+    <ul>
+      <li>Grey-out unavailable size/color combinations in real-time as the customer selects options</li>
+      <li>Enforce exact stock limits when adding to cart (prevents over-ordering)</li>
+      <li>Show "Out of Stock" and disable Add-to-Cart when no stock remains for the selected combination</li>
+    </ul>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 5 -->
+  <div class="feature-section" id="categories">
+    <div class="section-header">
+      <div class="section-icon">🏷️</div>
+      <div><div class="section-number">SECTION 5</div><div class="section-title">Category Management</div></div>
+    </div>
+    <p>Categories define the organizational structure of the product catalog. They are stored in Firestore <span class="tag">categories</span> collection and control how products are grouped and filtered on the storefront.</p>
+    <h3>Category Data Structure</h3>
+    <table class="data-table">
+      <tr><th>Field</th><th>Description</th><th>Example</th></tr>
+      <tr><td>name</td><td>Category display name</td><td>Jackets</td></tr>
+      <tr><td>gender</td><td>Department association</td><td>Men, Women, Kids, Unisex</td></tr>
+      <tr><td>parent</td><td>Optional parent (creates sub-category)</td><td>Men</td></tr>
+      <tr><td>image</td><td>Thumbnail URL shown in category grids</td><td>https://...</td></tr>
+    </table>
+    <h3>How Categories Flow to the Storefront</h3>
+    <ol class="step-list">
+      <li>Admin creates a category (e.g. "Jackets" under parent "Men") — saved to Firestore <span class="tag">categories</span>.</li>
+      <li>When adding a product, the admin form's category dropdown dynamically loads from this collection, grouped by department.</li>
+      <li>Selected category is saved as the product's <code>category</code> field (e.g. "Men • Jackets").</li>
+      <li>On the storefront, customers click a navigation link (e.g. "Men") which triggers <code>products.html?category=men</code>.</li>
+      <li>The storefront's <code>loadProducts()</code> filters products where <code>data.category</code> contains that keyword.</li>
+    </ol>
+    <div class="info-box">💡 <strong>Tip:</strong> Category names use a contains-text match. A product with category "Men • Jackets" will appear when filtering by <code>?category=men</code> OR <code>?category=jackets</code>.</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 6 -->
+  <div class="feature-section" id="inventory">
+    <div class="section-header">
+      <div class="section-icon">📦</div>
+      <div><div class="section-number">SECTION 6</div><div class="section-title">Inventory Management</div></div>
+    </div>
+    <p>The Inventory view provides a unified table of all product variant stock levels, restock actions, and a timestamped history log.</p>
+    <h3>Stock Level Indicators</h3>
+    <table class="data-table">
+      <tr><th>Status</th><th>Threshold</th><th>Admin Display</th><th>Storefront Effect</th></tr>
+      <tr><td><span class="tag green">In Stock</span></td><td>Stock &gt; 5</td><td>Normal text</td><td>Add-to-Cart enabled</td></tr>
+      <tr><td><span class="tag gold">Low Stock</span></td><td>Stock 1–5</td><td>Red text + badge</td><td>Add-to-Cart still works; alert shown to admin</td></tr>
+      <tr><td><span class="tag red">Out of Stock</span></td><td>Stock = 0</td><td>Highlighted in red</td><td>Add-to-Cart disabled; "Out of Stock" label shown</td></tr>
+    </table>
+    <h3>Restock Process</h3>
+    <ol class="step-list">
+      <li>Admin clicks <strong>Restock</strong> next to a variant.</li>
+      <li>A modal shows current stock and a quantity input.</li>
+      <li>Admin enters units to add and submits.</li>
+      <li>New stock total is written back to Firestore <span class="tag">products</span> document.</li>
+      <li>A record is logged to <span class="tag">stock_history</span> with timestamp and operator name.</li>
+      <li>Storefront immediately reflects the updated stock — the product becomes purchasable again.</li>
+    </ol>
+    <p>The Stock History Log panel displays the last 10 adjustments with product, variant, quantity delta, timestamp, and who made the change.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 7 -->
+  <div class="feature-section" id="payments">
+    <div class="section-header">
+      <div class="section-icon">💳</div>
+      <div><div class="section-number">SECTION 7</div><div class="section-title">Payment Ledger</div></div>
+    </div>
+    <p>The Payments view is a complete financial transaction log built by reading all order records from the <span class="tag">orders</span> collection.</p>
+    <h3>Summary KPI Cards</h3>
+    <table class="data-table">
+      <tr><th>Metric</th><th>Calculation</th></tr>
+      <tr><td>Gross Sales (Paid)</td><td>Sum of totalAmount for orders where paymentStatus = "Paid"</td></tr>
+      <tr><td>Refunds Processed</td><td>Sum of totalAmount for orders where paymentStatus = "Refunded"</td></tr>
+      <tr><td>Net Revenue</td><td>Gross Sales minus Refunds total</td></tr>
+    </table>
+    <h3>Refund Action</h3>
+    <p>For any "Paid" order, clicking <strong>Refund</strong> updates the order's <code>paymentStatus</code> to "Refunded" in Firestore. The KPI cards and ledger reflect this change immediately on next load.</p>
+    <div class="info-box">💡 <strong>Note:</strong> Payment data originates from the storefront's checkout. The Admin Payment Ledger only reads and manages existing transaction data — it does not create payments itself.</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 8 -->
+  <div class="feature-section" id="shipping">
+    <div class="section-header">
+      <div class="section-icon">🚚</div>
+      <div><div class="section-number">SECTION 8</div><div class="section-title">Shipping Configuration</div></div>
+    </div>
+    <p>The Shipping view has two panels: an active shipments tracker and a shipping fee configuration form.</p>
+    <h3>Active Shipments Tracker</h3>
+    <p>Lists dispatched orders showing customer address, assigned courier, tracking number, and status. Admin can update courier and tracking info directly — saved back to the <span class="tag">orders</span> collection.</p>
+    <h3>Shipping Fee Configuration (Impact on Storefront Cart)</h3>
+    <table class="data-table">
+      <tr><th>Setting</th><th>Storefront Effect</th></tr>
+      <tr><td>Standard Shipping Fee</td><td>Applied to cart total on cart.html for standard delivery</td></tr>
+      <tr><td>Express Shipping Fee</td><td>Applied for express delivery selection at checkout</td></tr>
+      <tr><td>Free Shipping Threshold</td><td>Cart subtotals above this amount result in Rs. 0.00 shipping</td></tr>
+      <tr><td>Approved Couriers</td><td>List of couriers available when admin dispatches an order</td></tr>
+    </table>
+    <p>Settings are saved to <span class="tag">settings/store_info</span> in Firestore.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 9 -->
+  <div class="feature-section" id="discounts">
+    <div class="section-header">
+      <div class="section-icon">🎟️</div>
+      <div><div class="section-number">SECTION 9</div><div class="section-title">Discounts &amp; Banners</div></div>
+    </div>
+    <p>This section has two independent panels: Coupon Code creator and Homepage Banner/Campaign manager.</p>
+    <h3>Coupon Codes</h3>
+    <p>Coupons are stored in the Firestore <span class="tag">coupons</span> collection. The storefront checkout page reads and validates these codes when a customer applies one.</p>
+    <table class="data-table">
+      <tr><th>Coupon Type</th><th>How It Works at Checkout</th></tr>
+      <tr><td>Percentage (%)</td><td>Reduces cart total by the set percentage (e.g. 20% off)</td></tr>
+      <tr><td>Fixed Amount (LKR)</td><td>Deducts a flat amount from cart total (e.g. Rs. 500 off)</td></tr>
+      <tr><td>Buy 2 Get 1 Free (B2G1)</td><td>Applies buy-two-get-one logic at checkout</td></tr>
+    </table>
+    <p>Each coupon also has: a <strong>Minimum Purchase Amount</strong> (cart must exceed this), an <strong>Expiry Date</strong>, and an <strong>Active/Inactive Status</strong> switch.</p>
+    <h3>Homepage Banners &amp; Campaigns</h3>
+    <p>Banners are stored in the Firestore <span class="tag">banners</span> collection and control the visual content of the homepage promotional sections.</p>
+    <table class="data-table">
+      <tr><th>Banner Type</th><th>Storefront Location</th></tr>
+      <tr><td>Top Hero Banner</td><td>Full-width hero slider at the top of index.html — auto-cycles every 6 seconds</td></tr>
+      <tr><td>Seasonal Collection Grid</td><td>2–3 column image grid section below the hero</td></tr>
+      <tr><td>Featured Collection Spotlight</td><td>Featured product/collection section further down the homepage</td></tr>
+    </table>
+    <ol class="step-list">
+      <li>Admin creates a banner with title, image URL, link, and section type — saved to Firestore <span class="tag">banners</span>.</li>
+      <li>On page load, index.html queries banners filtered by type and renders them into the correct homepage section.</li>
+      <li>Multiple banners of the same type are displayed together in that section (slider or grid).</li>
+    </ol>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 10 -->
+  <div class="feature-section" id="reviews">
+    <div class="section-header">
+      <div class="section-icon">⭐</div>
+      <div><div class="section-number">SECTION 10</div><div class="section-title">Reviews &amp; Feedback</div></div>
+    </div>
+    <p>The Reviews view manages all customer-submitted product ratings stored in the Firestore <span class="tag">reviews</span> collection.</p>
+    <h3>Review Workflow</h3>
+    <ol class="step-list">
+      <li>Customer submits a star rating and text review on the storefront's product-details.html page.</li>
+      <li>Review is saved to Firestore <span class="tag">reviews</span> with product ID, customer email, rating (1–5), comment, and timestamp.</li>
+      <li>Review appears in the Admin's moderation table with status "Pending".</li>
+      <li>Admin can <strong>Approve</strong> the review (makes it publicly visible on the storefront) or <strong>Reject</strong> it (permanently hides it).</li>
+      <li>Admin can write an <strong>Admin Reply</strong> that appears below the customer's review on the storefront product page.</li>
+    </ol>
+    <div class="info-box">💡 <strong>Storefront Display:</strong> Only reviews with <code>status = "Approved"</code> are fetched and shown on product detail pages. The average star rating is calculated dynamically from all approved reviews for that product.</div>
+    <div class="warning-box">⚠️ <strong>Note:</strong> Reviews are linked to products by productId. If a product is deleted, its reviews remain in the database but won't display since the product page no longer exists.</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 11 -->
+  <div class="feature-section" id="reports">
+    <div class="section-header">
+      <div class="section-icon">📈</div>
+      <div><div class="section-number">SECTION 11</div><div class="section-title">Reports &amp; Analytics</div></div>
+    </div>
+    <p>The Reports view provides visual and numerical business intelligence. It does not directly affect the storefront but gives management data to make informed decisions about the catalog and pricing.</p>
+    <h3>Analytics Scope Selector</h3>
+    <p>Switch between <strong>Daily</strong>, <strong>Weekly</strong>, and <strong>Monthly</strong> granularity. The sales chart updates accordingly to show trends at the selected time resolution.</p>
+    <h3>Key Metrics Calculated</h3>
+    <table class="data-table">
+      <tr><th>Metric</th><th>How It Is Calculated</th></tr>
+      <tr><td>Total Stock Valuation</td><td>Sum of (stock quantity × price) for every product and variant</td></tr>
+      <tr><td>Return Rate</td><td>(Returned orders ÷ Total orders) × 100%</td></tr>
+      <tr><td>Exchange Rate</td><td>(Exchange requests ÷ Total orders) × 100%</td></tr>
+      <tr><td>Customer Growth (30 days)</td><td>Count of customer accounts created in the past 30 days</td></tr>
+    </table>
+    <h3>Top Viewed Products</h3>
+    <p>Displays products ranked by view count — tracked when customers open product detail pages on the storefront. Helps identify high-interest items that may not be converting to sales.</p>
+    <h3>Detailed Sales Chart</h3>
+    <p>A Chart.js bar/line chart built by grouping all order <code>totalAmount</code> values by the selected date granularity. Gives a visual revenue trend over time.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 12 -->
+  <div class="feature-section" id="staff">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <div><div class="section-number">SECTION 12</div><div class="section-title">Staff Management</div></div>
+    </div>
+    <p>Controls who has access to the Admin Panel and what they can do. Staff accounts are stored in the Firestore <span class="tag">staff</span> collection.</p>
+    <h3>Role Permission Levels</h3>
+    <table class="data-table">
+      <tr><th>Role</th><th>Access Level</th><th>Restricted From</th></tr>
+      <tr><td><strong>Staff</strong></td><td>Basic — view products and process basic tasks only</td><td>Categories, Payments, Shipping, Discounts, Staff, Settings</td></tr>
+      <tr><td><strong>Manager</strong></td><td>Extended — edit catalog, process returns and refunds</td><td>Staff management and system-level settings</td></tr>
+      <tr><td><strong>Administrator</strong></td><td>Full root access — unrestricted to all sections</td><td>Nothing</td></tr>
+    </table>
+    <h3>Approval Status</h3>
+    <ul>
+      <li><span class="tag green">Approved</span> — Staff can log in and access the admin panel</li>
+      <li><span class="tag gold">Pending</span> — Account awaiting approval; login is blocked</li>
+      <li><span class="tag red">Denied</span> — Login access permanently blocked</li>
+    </ul>
+    <h3>Login History Tracker</h3>
+    <p>Records each admin login with staff email, browser/device info, and timestamp — creating a full audit trail of who accessed the admin panel and when.</p>
+    <div class="info-box">💡 <strong>Storefront Impact:</strong> Staff accounts only control Admin Panel access. Customer-facing shoppers are entirely separate and are not managed here.</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 13 -->
+  <div class="feature-section" id="settings">
+    <div class="section-header">
+      <div class="section-icon">⚙️</div>
+      <div><div class="section-number">SECTION 13</div><div class="section-title">Store Settings</div></div>
+    </div>
+    <p>Store Settings is the master configuration panel. All settings are saved to the <span class="tag">settings/store_info</span> Firestore document and affect both the Admin Panel and the Storefront globally.</p>
+    <h3>Configuration Fields &amp; Their Storefront Impact</h3>
+    <table class="data-table">
+      <tr><th>Setting</th><th>Where It Is Used</th></tr>
+      <tr><td>Store Name</td><td>Page titles, invoice headers, email templates</td></tr>
+      <tr><td>Store Admin Email</td><td>Invoice footers, notification destination</td></tr>
+      <tr><td>Store Phone</td><td>Invoice footer and contact sections</td></tr>
+      <tr><td>Store Address</td><td>Invoice receipt header</td></tr>
+      <tr><td><strong>Currency Symbol</strong></td><td>ALL price displays across Admin Panel AND Storefront. Default: Rs. (LKR)</td></tr>
+      <tr><td>Default Tax Rate (%)</td><td>Applied to order totals at checkout; shown in payment summaries</td></tr>
+      <tr><td>Storefront URL</td><td>Admin "View Store" links to preview the customer-facing site</td></tr>
+      <tr><td>Admin URL</td><td>Deep-linking between the two apps</td></tr>
+      <tr><td>Facebook / Instagram / Twitter URLs</td><td>Footer social media icons and links on the storefront</td></tr>
+      <tr><td>New Order Notifications</td><td>Triggers admin alert when new orders are placed by customers</td></tr>
+      <tr><td>Low Stock Notifications</td><td>Triggers admin alert when product/variant stock falls to ≤ 5</td></tr>
+      <tr><td>Return Request Notifications</td><td>Triggers admin alert when a customer submits a return request</td></tr>
+    </table>
+    <h3>Currency Setting — Full Impact</h3>
+    <p>When the Currency Symbol is changed and saved, the following update across the entire system:</p>
+    <ul>
+      <li>Dashboard KPI cards (Total Sales display)</li>
+      <li>Products list price columns</li>
+      <li>Order management table amounts</li>
+      <li>Payment ledger transaction amounts</li>
+      <li>All printed invoice receipts (subtotal, shipping, grand total)</li>
+      <li>Analytics stock valuation figures</li>
+      <li>Storefront product prices (if currency is read from Firestore by the storefront)</li>
+    </ul>
+    <p>Available options: <strong>LKR (Rs.)</strong>, USD ($), EUR (&euro;), GBP (&pound;), JPY (&yen;), INR (Rs)</p>
+  </div>
+
+  <hr class="section-divider">
+  <div style="text-align: center; margin-top: 40px; color: #aaa; font-size: 9pt; padding-top: 20px; border-top: 1px solid #eee;">
+    Anjiana Store — Admin Feature Documentation &nbsp;|&nbsp; July 2026 &nbsp;|&nbsp; For internal use only
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Save / Print as PDF</button>
+</body>
+</html>

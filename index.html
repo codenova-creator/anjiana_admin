@@ -98,6 +98,25 @@
     font-size: 0.9rem;
     text-align: center;
   }
+
+  @media (max-width: 480px) {
+    .auth-box {
+      padding: 2rem 1.25rem;
+      margin: 1.25rem;
+      border-radius: 12px;
+    }
+    .auth-box h2 {
+      font-size: 1.3rem !important;
+      margin-bottom: 1.5rem !important;
+    }
+    .logo {
+      font-size: 1.35rem !important;
+      margin-bottom: 1.5rem !important;
+    }
+    .btn {
+      padding: 12px;
+    }
+  }
 </style>
 
 <body>
@@ -107,6 +126,12 @@
       <div class="logo" style="text-align: center; margin-bottom: 2rem; color: #fff;">Anjiana Store ADMIN</div>
       <h2 style="font-size: 1.5rem; margin-bottom: 2rem; text-align: center; font-weight: 500;">Welcome Back</h2>
 
+      <!-- Tab Toggles -->
+      <div class="auth-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 8px;">
+        <button type="button" id="tabAdmin" class="auth-tab-btn active" style="flex: 1; padding: 10px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;">Admin Login</button>
+        <button type="button" id="tabStaff" class="auth-tab-btn" style="flex: 1; padding: 10px; border: none; background: none; color: rgba(255,255,255,0.5); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;">Staff Login</button>
+      </div>
+
       <form id="loginForm">
         <div id="errorMessage"
           style="display: none; color: #EF5350; background: rgba(239, 83, 80, 0.1); border: 1px solid rgba(239, 83, 80, 0.3); padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem; text-align: center;">
@@ -114,14 +139,14 @@
         <div id="resetMessage" class="reset-message"></div>
 
         <div class="form-group">
-          <label for="email" style="color: rgba(255,255,255,0.8);">Email Address</label>
-          <input type="email" id="email" class="form-control" placeholder="admin@Anjiana Store.com" required>
+          <label for="email" id="emailLabel" style="color: rgba(255,255,255,0.8);">Admin Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter email address" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="passwordGroup">
           <label for="password" style="color: rgba(255,255,255,0.8);">Password</label>
           <div class="password-wrapper">
-            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            <input type="password" id="password" class="form-control" placeholder="Enter password">
             <button type="button" id="togglePassword" class="password-toggle" aria-label="Toggle password visibility">
               👁️
             </button>
