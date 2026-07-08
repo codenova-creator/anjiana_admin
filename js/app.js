@@ -115,45 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Admin return button logic
-    if (sessionStorage.getItem('isAdminSession') === 'true' && !window.location.pathname.includes('/admin/')) {
-        const adminBtn = document.createElement('a');
-        adminBtn.href = 'admin/dashboard.html';
-        adminBtn.innerText = '⚙️ Back to Admin';
-        adminBtn.style.position = 'fixed';
-        adminBtn.style.bottom = '30px';
-        adminBtn.style.left = '30px';
-        adminBtn.style.background = 'var(--primary-color)';
-        adminBtn.style.color = 'var(--secondary-color)';
-        adminBtn.style.padding = '12px 20px';
-        adminBtn.style.borderRadius = '30px';
-        adminBtn.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
-        adminBtn.style.zIndex = '9999';
-        adminBtn.style.textDecoration = 'none';
-        adminBtn.style.fontWeight = '600';
-        adminBtn.style.fontSize = '0.9rem';
-        adminBtn.style.display = 'flex';
-        adminBtn.style.alignItems = 'center';
-        adminBtn.style.gap = '8px';
-        adminBtn.style.border = '1px solid rgba(255,255,255,0.2)';
-        adminBtn.style.transition = 'all var(--transition-fast)';
-        
-        // Hover effect
-        adminBtn.addEventListener('mouseenter', () => {
-            adminBtn.style.transform = 'translateY(-3px)';
-            adminBtn.style.boxShadow = '0 15px 30px rgba(0,0,0,0.4)';
-            adminBtn.style.background = 'var(--accent-color)';
-            adminBtn.style.color = '#1A1A1A';
-        });
-        adminBtn.addEventListener('mouseleave', () => {
-            adminBtn.style.transform = 'translateY(0)';
-            adminBtn.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
-            adminBtn.style.background = 'var(--primary-color)';
-            adminBtn.style.color = 'var(--secondary-color)';
-        });
 
-        document.body.appendChild(adminBtn);
-    }
 
     // 1. Storefront Mobile Navigation Drawer Injection & Logic
     const navbar = document.querySelector('.navbar');
